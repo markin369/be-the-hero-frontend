@@ -18,8 +18,8 @@ export default function Profile(){
             }
         }).then(response => {
             setIncidents(response.data);
+            console.log(response.data);
         });
-
     }, [ongId]);
 
     async function handleDeleteincident(id){
@@ -55,7 +55,7 @@ export default function Profile(){
                 </button>
                 </BoxText>                
             </BoxHeader>   
-            <Title><h1>Casos Cadastrados</h1></Title>                
+            <Title>{incidents.length!==0?<h1>Casos Cadastrados</h1>:<center><h3>Ainda não temos nenhum caso cadastrado..</h3></center>}</Title>                
         <Container>                
                 {incidents.map(incident => (
                     <Box key={incident.id}>
