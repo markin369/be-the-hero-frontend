@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import LogoImg from '../../assets/logo.svg';
 import { Link, useHistory } from 'react-router-dom';
 import {FiArrowLeft} from 'react-icons/fi';
-import './styles.css';
+//import './styles.css';
+import { Container, Content} from './styles';
 import api from '../../services/api';
 
 export default function NewIncident(){
@@ -31,8 +32,9 @@ export default function NewIncident(){
         }
     }
     return(
-        <div className="new-incident-container">
-            <div className="content">
+                
+        <Container>
+            <Content>                
                 <section>
                 <img src={LogoImg} alt="Be The Hero"/>                
                 <h1>Cadastro de Casos</h1>
@@ -41,7 +43,8 @@ export default function NewIncident(){
                     <FiArrowLeft size={16} color="#E02041"/>
                     Voltar para home
                 </Link>
-                </section>
+                </section>                
+                
                 <form onSubmit={handleNewIncident}>
                     <input 
                         placeholder="Titulo do caso"
@@ -61,7 +64,8 @@ export default function NewIncident(){
 
                     <button className="button" type="submit">Cadastrar</button>
                 </form>
-            </div>
-        </div>
+                </Content>
+        </Container>            
+        
     );
 }

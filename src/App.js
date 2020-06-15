@@ -3,10 +3,14 @@ import './global.css';
 
 import Routes from './routes';
 
+import Global from "./styles/global";
 
 function App() {
-  return (
-    <Routes />
+  return (    
+    <>
+      <Global />
+      <Routes />
+    </>
   );
 }
 

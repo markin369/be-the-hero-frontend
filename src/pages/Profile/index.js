@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import logoImg from '../../assets/logo.svg';
 import {Link, useHistory} from 'react-router-dom';
 import {FiPower, FiTrash2} from 'react-icons/fi';
-import './styles.css';
+//import './styles.css';
+import { Container, Title, Box, BoxTitle, BoxText, BoxHeader } from "./styles";
 import api from '../../services/api';
 
 export default function Profile(){
@@ -39,22 +40,25 @@ export default function Profile(){
         history.push('/');
     }
     return(
-        <div className="profile-container">
-            <header>
-                <img src={logoImg} alt="Be The Hero"/>
+        <>                                        
+            <BoxHeader> 
+                <BoxTitle>               
+                <img src={logoImg} alt="Be The Hero"/>                                
+                </BoxTitle>                
                 <span>Bem vindo, {ongName}</span>
-
+                <BoxText>
                 <Link className="button" to="incidents/new">
                     Cadastrar Novo Caso
                 </Link>
                 <button onClick={handleLogout} type="button">
                     <FiPower size={18} color="#E02041"/>
                 </button>
-            </header>
-            <h1>Casos Cadastrados</h1>
-            <ul>                
+                </BoxText>                
+            </BoxHeader>   
+            <Title><h1>Casos Cadastrados</h1></Title>                
+        <Container>                
                 {incidents.map(incident => (
-                    <li key={incident.id}>
+                    <Box key={incident.id}>
                         <strong>CASO:</strong>
                         <p>{incident.title}</p>
 
@@ -64,12 +68,13 @@ export default function Profile(){
                         <strong>VALOR:</strong>
                         <p>{Intl.NumberFormat('pt-br', {style: 'currency', currency: 'BRL'}).format(incident.value)}</p>
 
-                        <button onClick={() => handleDeleteincident(incident.id)} type="button">
+                        <button className="btn-remove" onClick={() => handleDeleteincident(incident.id)} type="button">
                             <FiTrash2 size={20} color="a8a8b3"/>
                         </button>
-                </li>
+                </Box>
                 ))}
-            </ul>
-        </div>
+            
+        </Container>
+        </>        
     );
 }

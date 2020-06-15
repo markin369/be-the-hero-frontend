@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {FiLogIn} from 'react-icons/fi';
-import './styles.css';
+//import './styles.css';
+import { Container, Box, BoxTitle, BoxText } from "./styles";
 import heroesImg from '../../assets/heroes.png';
 import logoImg from '../../assets/logo.svg';
 import { Link, useHistory } from 'react-router-dom';
@@ -23,9 +24,12 @@ export default function Logon(){
 
     }
     return(
-        <div className="logon-container">
-            <section className="form">
+        <Container>        
+            <Box>
+                <BoxTitle>
                 <img src={logoImg} alt="Be-The-Hero"/>
+                </BoxTitle>
+                <BoxText>
                 <form onSubmit={handleLogin}>
                     <h1>Faça seu logon</h1>
                     <input 
@@ -39,8 +43,12 @@ export default function Logon(){
                         Não tenho cadastro
                     </Link>
                 </form>
-            </section>
-            <img src={heroesImg} alt="Heroes"/>
-        </div>
+                </BoxText>
+            
+            </Box>
+            <Box>
+            <img src={heroesImg} alt="Heroes"/>                        
+            </Box>        
+        </Container>
     );
 }

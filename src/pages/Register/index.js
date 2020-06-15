@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import LogoImg from '../../assets/logo.svg';
 import { Link, useHistory } from 'react-router-dom';
 import {FiArrowLeft} from 'react-icons/fi';
-import './styles.css';
+//import './styles.css';
+import { Container, Content} from './styles';
 import api from '../../services/api';
 
 export default function Register(){
@@ -33,8 +34,8 @@ export default function Register(){
         }    
     }
     return(
-        <div className="register-container">
-            <div className="content">
+        <Container>
+            <Content>
                 <section>
                 <img src={LogoImg} alt="Be The Hero"/>                
                 <h1>Cadastro</h1>
@@ -76,7 +77,7 @@ export default function Register(){
 
                     <button className="button" type="submit">Cadastrar</button>
                 </form>
-            </div>
-        </div>
+            </Content>
+        </Container>    
     );
 }
