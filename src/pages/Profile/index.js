@@ -10,7 +10,8 @@ export default function Profile(){
     const ongId = localStorage.getItem('ongId');
     const ongName = localStorage.getItem('ongName');
     const [incidents, setIncidents] = useState([]);
-    const history = useHistory();    
+    const history = useHistory();
+    const [title, setTitle] = useState('');    
     useEffect(()=>{                        
         api.get('profile', {
             headers: {
@@ -18,7 +19,7 @@ export default function Profile(){
             }
         }).then(response => {
             setIncidents(response.data);
-            console.log(response.data);
+            setTitle(response.data.length!==0?<h1>Casos Cadastrados</h1>:<center><h3>Ainda não temos nenhum caso cadastrado..</h3></center>);
         });
     }, [ongId]);
 
@@ -31,6 +32,13 @@ export default function Profile(){
             });
             
             setIncidents(incidents.filter(incident => incident.id !== id));
+            console.log("Excluido: "+incidents[0].id);
+            incidents.map(incident => {
+                if(incidents.length===1&&incident.id===id)
+                    return setTitle(<center><h3>Ainda não temos casos cadastrados...</h3></center>);
+                return setTitle(<h1>Casos Cadastrados</h1>)
+            })
+            //setTitle(incidents[0].id!==id?<h1>Casos Cadastrados</h1>:<center><h3>Ainda não temos nenhum caso cadastrado..</h3></center>);
         }catch(error){
             alert('Erro ao tentar excluir, tente novamente');
         }        
@@ -55,7 +63,7 @@ export default function Profile(){
                 </button>
                 </BoxText>                
             </BoxHeader>   
-            <Title>{incidents.length!==0?<h1>Casos Cadastrados</h1>:<center><h3>Ainda não temos nenhum caso cadastrado..</h3></center>}</Title>                
+            <Title>{title}</Title>                
         <Container>                
                 {incidents.map(incident => (
                     <Box key={incident.id}>
@@ -68,7 +76,7 @@ export default function Profile(){
                         <strong>VALOR:</strong>
                         <p>{Intl.NumberFormat('pt-br', {style: 'currency', currency: 'BRL'}).format(incident.value)}</p>
 
-                        <button className="btn-remove" onClick={() => handleDeleteincident(incident.id)} type="button">
+                        <button className="btn-remove" onClick={() => window.confirm('Tem certeza que deseja excluir o caso?')?handleDeleteincident(incident.id):""} type="button">
                             <FiTrash2 size={20} color="a8a8b3"/>
                         </button>
                 </Box>
